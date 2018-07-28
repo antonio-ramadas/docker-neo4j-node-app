@@ -8,6 +8,11 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+var db = require('./neo4j');
+db.listFromCategory("Laptops").then(
+    res => console.log(res),
+    rej => console.error(rej));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
