@@ -12,22 +12,37 @@ module.exports = new function() {
         const session = driver.session();
 
         return session.run(query, params).then(
-            success => {session.close(); return Promise.resolve(success.records);},
+            success => {session.close(); return Promise.resolve(success);},
             reject => {session.close(); return Promise.reject(reject);}
-        );
+        ).then(data => {
+            data = data.records.map(elem => {
+                return {
+                    name: elem.get("name"),
+                    category: elem.get("category")
+                };
+            });
+
+            data.sort((lhs, rhs) => (lhs.category > rhs.category) - (lhs.category < rhs.category));
+
+            return Promise.resolve(data);
+        });
     };
 
     this.listAll = () => {
-        return askDB("MATCH (n) RETURN (n)");
+        const query = `
+            MATCH (n)
+            RETURN labels(n)[0] AS category, n.name AS name
+        `;
+
+        return askDB(query);
     };
 
     this.listFromCategory = category => {
-        const query =
-            `
+        const query = `
             MATCH ((n)-[*]->(m:category))
             WHERE m.name = $name
-            RETURN n
-            `;
+            RETURN labels(n)[0] AS category, n.name AS name
+        `;
 
         const params = {
             name: category
