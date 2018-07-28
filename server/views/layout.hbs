@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Docker + Neo4J + Node</title>
+    <title>Docker + Neo4J + Node.js</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <h1>Docker + Neo4J + Node</h1>
+
+    <h2>API usage</h2>
+    <p>The root displays the full database. If a path is given (e.g., /Laptops), then it is shown all the nodes bellow that node.</p>
+
+    <h2>Response to current request</h2>
     {{{body}}}
+
+    <h2>Bellow is the graph of all the database</h2>
+    <img src="/images/full_db.png">
   </body>
 </html>
