@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  web:
+    container_name: web
+    build:
+      context: server/
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+  db:
+    image: neo4j
+    container_name: db
+    environment:
+      - NEO4J_AUTH=none
+    volumes:
+      - "./neo4j/:/data"

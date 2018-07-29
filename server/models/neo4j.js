@@ -1,7 +1,7 @@
 
 module.exports = new function() {
 
-    const uri = process.env.DB_URI || "bolt://localhost:7687";
+    const uri = process.env.DB_URI || "bolt://db:7687";
     const user = process.env.DB_USER || "neo4j";
     const password = process.env.DB_PASSWORD || "neo4j";
 
