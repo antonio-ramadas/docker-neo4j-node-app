@@ -57,7 +57,7 @@ RETURN (N)
 If you before doing these queries in order, you create a node labeled `product` and 
 with the `name` property set to `Tech`, then you will end up with the following graph:
 
-![Graph][server/public/images/full_db.png]
+![Graph](server/public/images/full_db.png)
 
 > Note: I do not entirely agree with the structure of these categories, but I am trying to 
 replicate (in a very small scale) the 
