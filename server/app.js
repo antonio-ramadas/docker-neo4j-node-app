@@ -27,8 +27,8 @@ app.use('/*', (req, res, next) => {
 
     f(arg).then(
         val => res.render('index', {nodes: val}),
-        // TODO The error code is not very precise (it is not checked the true reason)
-        error => next(createError(400)));
+        // It was not able to connect to the database
+        error => next(createError(500)));
 });
 
 // error handler
