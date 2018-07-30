@@ -21,9 +21,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/*', (req, res, next) => {
     let hasParameter = req.params[0].length > 0;
 
-    let f = hasParameter ? neo4j.listFromCategory : neo4j.listAll;
+    let f = neo4j.listAll;
+    let arg = undefined;
 
-    let arg = hasParameter ? req.params[0] : undefined;
+    if (hasParameter) {
+        f = neo4j.listFromCategory;
+        arg = req.params[0];
+    }
 
     f(arg).then(
         val => res.render('index', {nodes: val}),
